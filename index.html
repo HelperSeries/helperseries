@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeHelper: 호스트 성공 시뮬레이션</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #1c1917; color: white; }
+        
+        /* 타임라인 선을 가장 뒤로 보냄 (z-index: 0) */
+        .step-line { position: absolute; left: 50%; transform: translateX(-50%); width: 2px; height: 100%; background: linear-gradient(to bottom, #f43f5e, #3b82f6, #10b981, #f59e0b); z-index: 0; }
+        
+        .glow-text { text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+        
+        /* Floating Button Animation */
+        .pulse-btn { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(244, 63, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+        }
+    </style>
+</head>
+<body class="py-20 px-4 pb-32">
+
+    <div class="max-w-4xl mx-auto relative">
+        <!-- Header -->
+        <div class="text-center mb-20 relative z-10">
+            <span class="text-rose-500 font-bold tracking-widest text-sm uppercase">Helper Series Universe</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold mt-2 mb-6 glow-text">호스트 성공 시뮬레이션</h1>
+            <p class="text-stone-400 text-lg">당신이 헬퍼시리즈를 만나는 순간,<br>단순한 운영자가 아닌 <span class="text-white font-bold">자산가이자 리더</span>로 성장합니다.</p>
+        </div>
+
+        <!-- Vertical Line -->
+        <div class="step-line hidden md:block"></div>
+
+        <!-- Step 1: Life Helper -->
+        <div class="flex flex-col md:flex-row items-center mb-20 gap-8 relative z-10">
+            <div class="md:w-1/2 text-right order-2 md:order-1">
+                <h2 class="text-2xl font-bold text-rose-500 mb-2">Step 1. 운영 등록 & 홍보</h2>
+                <h3 class="text-xl font-bold mb-3">라이프 헬퍼 (Life Helper)</h3>
+                <p class="text-stone-400 text-sm mb-4">"공실 때문에 힘드신가요? 저희가 채워드립니다."</p>
+                <div class="bg-stone-800 p-4 rounded-xl border border-stone-700 text-left inline-block">
+                    <strong class="text-rose-400 text-xs block mb-2">🚀 공실 케어 6대 솔루션 가동</strong>
+                    <ul class="text-xs text-stone-300 space-y-1">
+                        <li>✅ 여행사 인바운드 단체객 배정</li>
+                        <li>✅ OTA 상위 노출 & 최적가 설정</li>
+                        <li>✅ 24시 다국어 응대 & 리뷰 방어</li>
+                        <li>✅ 전문 청소/세탁 퀄리티 보장</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 아이콘 -->
+            <div class="order-1 md:order-2 z-20 relative">
+                <div class="w-16 h-16 rounded-full bg-rose-600 flex items-center justify-center text-2xl shadow-[0_0_20px_rgba(244,63,94,0.6)] border-4 border-[#1c1917]">
+                    <i class="fa-solid fa-hotel"></i>
+                </div>
+            </div>
+            <div class="md:w-1/2 order-3 hidden md:block"></div>
+        </div>
+
+        <!-- Step 2: Helper Store -->
+        <div class="flex flex-col md:flex-row items-center mb-20 gap-8 relative z-10">
+            <div class="md:w-1/2 hidden md:block"></div>
+            <div class="order-1 md:order-2 z-20 relative">
+                <div class="w-16 h-16 rounded-full bg-sky-600 flex items-center justify-center text-2xl shadow-[0_0_20px_rgba(2,132,199,0.6)] border-4 border-[#1c1917]">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+            </div>
+            <div class="md:w-1/2 order-2 md:order-3">
+                <h2 class="text-2xl font-bold text-sky-500 mb-2">Step 2. 비용 절감 & 효율</h2>
+                <h3 class="text-xl font-bold mb-3">헬퍼 스토어 (Helper Store)</h3>
+                <p class="text-stone-400 text-sm mb-4">"버는 것만큼 아끼는 것도 중요합니다."</p>
+                <div class="bg-stone-800 p-4 rounded-xl border border-stone-700">
+                    <ul class="text-xs text-stone-300 space-y-2">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-sky-500 mr-2"></i> 호텔급 어메니티/침구 도매가 공급</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-sky-500 mr-2"></i> 운영 고정비 평균 20% 절감</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Vacancy Helper -->
+        <div class="flex flex-col md:flex-row items-center mb-20 gap-8 relative z-10">
+            <div class="md:w-1/2 text-right order-2 md:order-1">
+                <h2 class="text-2xl font-bold text-emerald-500 mb-2">Step 3. 판매 & 엑시트</h2>
+                <h3 class="text-xl font-bold mb-3">공실 헬퍼 (Vacancy Helper)</h3>
+                <p class="text-stone-400 text-sm mb-4">"박수 칠 때 떠나고, 목돈을 만드세요."</p>
+                <div class="bg-stone-800 p-4 rounded-xl border border-stone-700 text-left inline-block">
+                    <ul class="text-xs text-stone-300 space-y-2">
+                        <li class="flex items-center"><i class="fa-solid fa-hand-holding-dollar text-emerald-500 mr-2"></i> 권리금 합리적 산정 및 직거래</li>
+                        <li class="flex items-center"><i class="fa-solid fa-file-contract text-emerald-500 mr-2"></i> 조숙현 공인중개사의 안전 계약</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="order-1 md:order-2 z-20 relative">
+                <div class="w-16 h-16 rounded-full bg-emerald-600 flex items-center justify-center text-2xl shadow-[0_0_20px_rgba(16,185,129,0.6)] border-4 border-[#1c1917]">
+                    <i class="fa-solid fa-money-bill-trend-up"></i>
+                </div>
+            </div>
+            <div class="md:w-1/2 order-3 hidden md:block"></div>
+        </div>
+
+        <!-- Step 4: Helper Academy -->
+        <div class="flex flex-col md:flex-row items-center mb-20 gap-8 relative z-10">
+            <div class="md:w-1/2 hidden md:block"></div>
+            <div class="order-1 md:order-2 z-20 relative">
+                <div class="w-16 h-16 rounded-full bg-purple-600 flex items-center justify-center text-2xl shadow-[0_0_20px_rgba(147,51,234,0.6)] border-4 border-[#1c1917]">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+            </div>
+            <div class="md:w-1/2 order-2 md:order-3">
+                <h2 class="text-2xl font-bold text-purple-500 mb-2">Step 4. 재투자 & 확장</h2>
+                <h3 class="text-xl font-bold mb-3">헬퍼 아카데미 (Scale-Up)</h3>
+                <p class="text-stone-400 text-sm mb-4">"호스트를 넘어 건물주로 레벨업하세요."</p>
+                <div class="bg-stone-800 p-4 rounded-xl border border-stone-700">
+                    <strong class="text-purple-400 text-xs block mb-2">💎 프로젝트 팀(어벤져스) 전담 마크</strong>
+                    <ul class="text-xs text-stone-300 space-y-1">
+                        <li>• [건축/법률] 리모델링 인허가 & 계약 리스크 제거</li>
+                        <li>• [경매/중개] 수익형 건물/다호점 매물 추천</li>
+                        <li>• [현금흐름] 시스템 수익 구조 설계</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 5: BGN -->
+        <div class="flex flex-col md:flex-row items-center gap-8 mb-20 relative z-10">
+            <div class="md:w-1/2 text-right order-2 md:order-1">
+                <h2 class="text-2xl font-bold text-amber-500 mb-2">Step 5. 나눔 & 완성</h2>
+                <h3 class="text-xl font-bold mb-3">BGN (Business Give Network)</h3>
+                <p class="text-stone-400 text-sm mb-4">"성공을 나누고 세상을 이롭게 합니다."</p>
+                <div class="bg-gradient-to-r from-amber-600 to-amber-800 p-6 rounded-xl shadow-lg text-white text-left inline-block">
+                    <p class="font-serif italic text-lg mb-2">"Better Life, Better World"</p>
+                    <ul class="text-xs space-y-1 opacity-90">
+                        <li>• 전세계 기아 주거 지원 프로젝트</li>
+                        <li>• 호스트 해외 봉사 및 글로벌 네트워크</li>
+                        <li>• 진정한 경제적, 정신적 자유 달성</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="order-1 md:order-2 z-20 relative">
+                <div class="w-20 h-20 rounded-full bg-amber-500 flex items-center justify-center text-3xl shadow-[0_0_30px_rgba(245,158,11,0.8)] border-4 border-stone-900">
+                    <i class="fa-solid fa-hands-holding-child"></i>
+                </div>
+            </div>
+            <div class="md:w-1/2 order-3 hidden md:block"></div>
+        </div>
+
+        <!-- Final CTA Section -->
+        <div class="bg-stone-800 rounded-3xl p-8 md:p-12 text-center border border-stone-700 relative z-10">
+            <h2 class="text-3xl font-bold mb-4">이제 당신의 차례입니다.</h2>
+            <p class="text-stone-400 mb-8 max-w-lg mx-auto">
+                혼자 고민하는 시간은 끝났습니다.<br>
+                전문가 11명과 함께하는 호스트 생태계, 헬퍼시리즈에 지금 탑승하세요.
+            </p>
+            <a href="https://forms.gle/VxscSmaUGaCr8jHL9" target="_blank" class="inline-block bg-white text-stone-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-rose-50 transition shadow-lg pulse-btn">
+                👉 지금 바로 무료 진단 신청하기
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Sticky Floating CTA (With White Threads Button) -->
+    <div class="fixed bottom-0 left-0 w-full z-50 p-4 md:p-6 flex justify-center items-stretch gap-3 pointer-events-none">
+        
+        <!-- Application Form Button -->
+        <a href="https://forms.gle/VxscSmaUGaCr8jHL9" target="_blank" class="pointer-events-auto flex-1 md:flex-none md:w-auto md:min-w-[300px] bg-rose-600 text-white py-4 px-8 rounded-xl md:rounded-full font-bold text-center shadow-2xl hover:bg-rose-700 transition flex items-center justify-center gap-2 pulse-btn border-2 border-white/20 backdrop-blur-sm">
+            <span>🚀 호스트 성공 여정 시작하기 (신청)</span>
+        </a>
+
+        <!-- Threads Button (Official Icon) -->
+        <a href="https://www.threads.net/@hosthelper01" target="_blank" class="pointer-events-auto w-14 md:w-16 flex-none bg-white text-black rounded-xl md:rounded-full font-bold shadow-2xl hover:bg-stone-100 transition flex items-center justify-center border-2 border-white/20 backdrop-blur-sm">
+            <svg viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-black">
+                <path d="M141.537 88.9883C140.71 88.5919 139.87 88.2104 139.022 87.8451C137.534 83.339 135.351 79.0215 132.545 75.0213C128.536 69.3084 123.604 64.2483 117.862 59.9877C112.009 55.6457 105.421 52.4172 98.4357 50.4177C83.2797 46.0792 67.2454 48.068 53.6441 55.9396C39.2973 64.2415 28.5714 77.2917 23.3519 92.8395C18.1324 108.387 18.7909 125.32 25.2023 140.354C31.6137 155.388 43.3188 167.447 58.0772 174.223C70.3804 179.871 83.9535 181.795 97.2223 179.799C110.155 177.854 122.38 172.186 132.32 163.541L126.791 157.182C118.232 164.551 107.826 169.37 96.671 171.047C85.5164 172.725 74.1068 171.108 63.7635 166.36C51.3552 160.663 41.5135 150.525 36.1229 137.886C30.7323 125.247 30.1787 111.012 34.567 97.9407C38.9553 84.8693 47.9723 73.8973 60.0349 66.9178C71.4697 60.3001 84.9501 58.6278 97.6946 62.2753C103.567 63.9565 109.105 66.6706 114.025 70.3213C118.783 73.8517 122.875 78.037 126.223 82.7257C119.539 80.6083 112.531 79.5222 105.515 79.5215C97.1082 79.5215 88.8927 82.0292 81.8893 86.7328C74.886 91.4364 69.3957 98.1328 66.0954 106.002C62.7951 113.871 61.8265 122.569 63.3087 130.999C64.7909 139.429 68.6596 147.22 74.4371 153.411C80.2146 159.602 87.6534 163.926 95.8383 165.852C104.023 167.777 112.602 167.221 120.518 164.252C128.434 161.282 135.344 156.031 140.395 149.149C145.447 142.266 148.421 134.053 148.951 125.523V46H157.452V125.523C156.88 136.273 152.923 146.564 146.126 154.957C139.33 163.35 130.03 169.432 119.526 172.355C109.022 175.279 97.8329 174.887 87.5217 171.233C77.2105 167.579 68.2936 160.841 62.0159 151.956C56.2415 143.784 53.4479 133.799 54.1221 123.737C54.7963 113.675 58.8953 104.183 65.6983 96.9138C69.006 93.3798 72.8837 90.435 77.199 88.1819C81.5143 85.9288 86.2166 84.3912 91.1396 83.6267C96.0626 82.8622 101.154 82.8797 106.229 83.6786C111.303 84.4776 116.302 86.0494 121.043 88.3364C121.82 88.7112 122.585 89.1099 123.336 89.5317L123.375 89.5539C127.323 91.7925 130.73 94.886 133.253 98.5246C135.776 102.163 137.325 106.219 137.744 110.283C137.91 111.902 137.893 113.535 137.694 115.154C137.495 116.772 137.118 118.367 136.57 119.907C135.253 123.609 132.895 126.837 129.803 129.176C126.711 131.516 123.027 132.861 119.227 133.04C116.516 133.168 113.79 132.553 111.401 131.275C109.012 129.996 107.069 128.113 105.823 125.867C104.296 123.116 103.719 119.947 104.167 116.839C104.616 113.731 106.067 110.849 108.307 108.623C110.548 106.398 113.461 104.945 116.619 104.48C119.777 104.015 122.379 104.562 125.267 106.041L129.182 98.3976C124.673 96.0883 119.67 95.3975 114.706 96.4002C109.742 97.403 105.003 100.062 101.002 104.093C97.0007 108.124 94.4983 113.376 93.7667 119.018C93.0351 124.66 94.1017 130.482 96.8509 135.567C99.0762 139.684 102.502 143.072 106.697 145.297C110.892 147.523 115.669 148.485 120.424 148.062C127.09 147.469 133.321 144.389 137.935 139.387C142.548 134.385 145.231 127.8 145.485 121.109C145.739 114.417 143.547 107.81 139.317 102.511C135.087 97.2117 129.107 93.5791 122.483 92.2905C116.877 91.1995 111.127 91.3197 105.565 92.6441C100.003 93.9686 94.7397 96.4711 90.0792 100.007C84.7214 104.073 80.6277 109.61 78.2917 115.939C75.9557 122.268 75.4777 129.117 76.9157 135.657C78.3538 142.196 81.6455 148.147 86.3932 152.791C91.1408 157.435 97.1399 160.563 103.667 161.795C110.194 163.028 116.974 162.312 123.187 159.736C129.401 157.16 134.781 152.836 138.681 147.286L141.537 88.9883Z"/>
+            </svg>
+        </a>
+
+    </div>
+
+</body>
+</html>
