@@ -4,19 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- 1. 사이트 탭 이름 -->
-    <title>Helper Series</title>
+    <!-- 1. 사이트 탭 이름 (이모지 포함) -->
+    <title>🏡 Helper Series</title>
 
-    <!-- 2. 카톡/링크 공유 시 보이는 제목 -->
-    <meta property="og:title" content="Helper Series">
-    
-    <!-- 3. 카톡/링크 공유 시 보이는 설명 -->
+    <!-- 2. 파비콘 (탭 아이콘) 설정 - 별도 파일 없이 코드로 생성 -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏡</text></svg>">
+
+    <!-- 3. 카톡/링크 공유 설정 (오픈그래프) -->
+    <meta property="og:title" content="🏡 Helper Series">
     <meta property="og:description" content="호스트의 시작부터 성공까지, 헬퍼시리즈 유니버스">
-    
-    <!-- 4. 공유 시 보이는 이미지 (선택사항) -->
-    <meta property="og:image" content="https://helperseries.github.io/helperseries/image_03e15d.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- PortOne SDK -->
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 
     <style>
         body { font-family: 'Noto Sans KR', sans-serif; background-color: #1c1917; color: white; }
@@ -40,7 +42,6 @@
 
     <!-- Global Navigation -->
     <nav class="fixed top-0 w-full z-[100] bg-[#1c1917]/95 backdrop-blur-md border-b border-stone-800 h-16 flex items-center justify-between px-6">
-        <!-- Logo 변경: helperseries -->
         <a href="#" onclick="showPage('home')" class="font-bold text-xl tracking-tighter text-white">helperseries<span class="text-rose-500">.</span></a>
         
         <div class="hidden md:flex gap-6 text-sm font-medium text-stone-300">
@@ -115,7 +116,7 @@
                     <div class="bg-stone-800 p-4 rounded-xl border border-stone-700 text-left inline-block">
                         <ul class="text-xs text-stone-300 space-y-2">
                             <li class="flex items-center"><i class="fa-solid fa-hand-holding-dollar text-emerald-500 mr-2"></i> 권리금 합리적 산정 및 직거래</li>
-                            <li class="flex items-center"><i class="fa-solid fa-file-contract text-emerald-500 mr-2"></i> 공인중개사들과 안전 계약</li>
+                            <li class="flex items-center"><i class="fa-solid fa-file-contract text-emerald-500 mr-2"></i> 조숙현 공인중개사의 안전 계약</li>
                         </ul>
                     </div>
                 </div>
@@ -199,7 +200,7 @@
             </button>
         </div>
 
-        <!-- Curriculum (Updated: Survival & Growth) -->
+        <!-- Curriculum (Updated) -->
         <div class="max-w-4xl mx-auto mb-20">
             <div class="bg-stone-900 text-white p-8 rounded-2xl">
                 <h3 class="text-2xl font-bold mb-6 text-rose-400">Week 1. 생존과 방어 (Survival)</h3>
@@ -314,10 +315,19 @@
                 navHome.classList.add('text-rose-500', 'font-bold');
                 navLanding.classList.remove('text-rose-500', 'font-bold');
                 stickyBtnText.innerText = "🚀 호스트 리부트 챌린지 신청하기";
+                
+                // 홈에서는 배경 검정
+                document.body.style.backgroundColor = "#1c1917";
+                document.body.style.color = "white";
+                
             } else {
                 navLanding.classList.add('text-rose-500', 'font-bold');
                 navHome.classList.remove('text-rose-500', 'font-bold');
                 stickyBtnText.innerText = "💳 지금 바로 결제하기";
+                
+                // 랜딩에서는 배경 흰색
+                document.body.style.backgroundColor = "white";
+                document.body.style.color = "#1c1917";
             }
             window.scrollTo(0, 0);
         }
@@ -356,6 +366,3 @@
 
 </body>
 </html>
-
-
-
