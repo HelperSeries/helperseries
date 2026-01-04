@@ -3,229 +3,333 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LifeHelper: 호스트 성공 시뮬레이션</title>
+    <title>LifeHelper Universe</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- PortOne SDK -->
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+
     <style>
         body { font-family: 'Noto Sans KR', sans-serif; background-color: #1c1917; color: white; }
-        
-        /* 타임라인 선을 가장 뒤로 보냄 (z-index: 0) */
         .step-line { position: absolute; left: 50%; transform: translateX(-50%); width: 2px; height: 100%; background: linear-gradient(to bottom, #f43f5e, #3b82f6, #10b981, #f59e0b); z-index: 0; }
-        
         .glow-text { text-shadow: 0 0 10px rgba(255,255,255,0.3); }
-        
-        /* Floating Button Animation */
         .pulse-btn { animation: pulse 2s infinite; }
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(244, 63, 94, 0); }
             100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
         }
+        .gradient-text { background: linear-gradient(to right, #f43f5e, #e11d48); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* 페이지 전환 효과 */
+        .page-section { display: none; animation: fadeIn 0.5s ease-in-out; }
+        .page-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
-<body class="py-20 px-4 pb-48">
+<body class="pb-32">
 
-    <div class="max-w-4xl mx-auto relative">
-        <!-- Header -->
-        <div class="text-center mb-20 relative z-10">
-            <span class="text-rose-500 font-bold tracking-widest text-sm uppercase">Helper Series Universe</span>
-            <h1 class="text-4xl md:text-6xl font-extrabold mt-2 mb-6 glow-text">호스트 성공 시뮬레이션</h1>
-            <p class="text-stone-400 text-lg">당신이 헬퍼시리즈를 만나는 순간,<br>단순한 운영자가 아닌 <span class="text-white font-bold">자산가이자 리더</span>로 성장합니다.</p>
-        </div>
-
-        <!-- Vertical Line -->
-        <div class="step-line hidden md:block"></div>
-
-        <!-- Step 1: Life Helper -->
-        <div class="flex flex-col md:flex-row items-center mb-20 gap-8 relative z-10">
-            <div class="md:w-1/2 text-right order-2 md:order-1">
-                <h2 class="text-2xl font-bold text-rose-500 mb-2">Step 1. 운영 등록 & 홍보</h2>
-                <h3 class="text-xl font-bold mb-3">라이프 헬퍼 (Life Helper)</h3>
-                <p class="text-stone-400 text-sm mb-4">"공실 때문에 힘드신가요? 저희가 채워드립니다."</p>
-                <div class="bg-stone-800 p-4 rounded-xl border border-stone-700 text-left inline-block">
-                    <strong class="text-rose-400 text-xs block mb-2">🚀 공실 케어 6대 솔루션 가동</strong>
-                    <ul class="text-xs text-stone-300 space-y-1">
-                        <li>✅ 여행사 인바운드 단체객 배정</li>
-                        <li>✅ OTA 상위 노출 & 최적가 설정</li>
-                        <li>✅ 24시 다국어 응대 & 리뷰 방어</li>
-                        <li>✅ 전문 청소/세탁 퀄리티 보장</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- 아이콘 -->
-            <div class="order-1 md:order-2 z-20 relative">
-                <div class="w-16 h-16 rounded-full bg-rose-600 flex items-center justify-center text-2xl shadow-[0_0_20px_rgba(244,63,94,0.6)] border-4 border-[#1c1917]">
-                    <i class="fa-solid fa-hotel"></i>
-                </div>
-            </div>
-            <div class="md:w-1/2 order-3 hidden md:block"></div>
-        </div>
-
-        <!-- Step 2: Helper Store -->
-        <div class="flex flex-col md:flex-row items-center mb-20 gap-8 relative z-10">
-            <div class="md:w-1/2 hidden md:block"></div>
-            <div class="order-1 md:order-2 z-20 relative">
-                <div class="w-16 h-16 rounded-full bg-sky-600 flex items-center justify-center text-2xl shadow-[0_0_20px_rgba(2,132,199,0.6)] border-4 border-[#1c1917]">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </div>
-            </div>
-            <div class="md:w-1/2 order-2 md:order-3">
-                <h2 class="text-2xl font-bold text-sky-500 mb-2">Step 2. 비용 절감 & 효율</h2>
-                <h3 class="text-xl font-bold mb-3">헬퍼 스토어 (Helper Store)</h3>
-                <p class="text-stone-400 text-sm mb-4">"버는 것만큼 아끼는 것도 중요합니다."</p>
-                <div class="bg-stone-800 p-4 rounded-xl border border-stone-700">
-                    <ul class="text-xs text-stone-300 space-y-2">
-                        <li class="flex items-center"><i class="fa-solid fa-check text-sky-500 mr-2"></i> 호텔급 어메니티/침구 도매가 공급</li>
-                        <li class="flex items-center"><i class="fa-solid fa-check text-sky-500 mr-2"></i> 운영 고정비 평균 20% 절감</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Step 3: Vacancy Helper -->
-        <div class="flex flex-col md:flex-row items-center mb-20 gap-8 relative z-10">
-            <div class="md:w-1/2 text-right order-2 md:order-1">
-                <h2 class="text-2xl font-bold text-emerald-500 mb-2">Step 3. 판매 & 엑시트</h2>
-                <h3 class="text-xl font-bold mb-3">공실 헬퍼 (Vacancy Helper)</h3>
-                <p class="text-stone-400 text-sm mb-4">"박수 칠 때 떠나고, 목돈을 만드세요."</p>
-                <div class="bg-stone-800 p-4 rounded-xl border border-stone-700 text-left inline-block">
-                    <ul class="text-xs text-stone-300 space-y-2">
-                        <li class="flex items-center"><i class="fa-solid fa-hand-holding-dollar text-emerald-500 mr-2"></i> 권리금 합리적 산정 및 직거래</li>
-                        <li class="flex items-center"><i class="fa-solid fa-file-contract text-emerald-500 mr-2"></i> 조숙현 공인중개사의 안전 계약</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="order-1 md:order-2 z-20 relative">
-                <div class="w-16 h-16 rounded-full bg-emerald-600 flex items-center justify-center text-2xl shadow-[0_0_20px_rgba(16,185,129,0.6)] border-4 border-[#1c1917]">
-                    <i class="fa-solid fa-money-bill-trend-up"></i>
-                </div>
-            </div>
-            <div class="md:w-1/2 order-3 hidden md:block"></div>
-        </div>
-
-        <!-- Step 4: Helper Academy -->
-        <div class="flex flex-col md:flex-row items-center mb-20 gap-8 relative z-10">
-            <div class="md:w-1/2 hidden md:block"></div>
-            <div class="order-1 md:order-2 z-20 relative">
-                <div class="w-16 h-16 rounded-full bg-purple-600 flex items-center justify-center text-2xl shadow-[0_0_20px_rgba(147,51,234,0.6)] border-4 border-[#1c1917]">
-                    <i class="fa-solid fa-graduation-cap"></i>
-                </div>
-            </div>
-            <div class="md:w-1/2 order-2 md:order-3">
-                <h2 class="text-2xl font-bold text-purple-500 mb-2">Step 4. 재투자 & 확장</h2>
-                <h3 class="text-xl font-bold mb-3">헬퍼 아카데미 (Scale-Up)</h3>
-                <p class="text-stone-400 text-sm mb-4">"호스트를 넘어 건물주로 레벨업하세요."</p>
-                <div class="bg-stone-800 p-4 rounded-xl border border-stone-700">
-                    <strong class="text-purple-400 text-xs block mb-2">💎 프로젝트 팀(어벤져스) 전담 마크</strong>
-                    <ul class="text-xs text-stone-300 space-y-1">
-                        <li>• [건축/법률] 리모델링 인허가 & 계약 리스크 제거</li>
-                        <li>• [경매/중개] 수익형 건물/다호점 매물 추천</li>
-                        <li>• [현금흐름] 시스템 수익 구조 설계</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Step 5: BGN -->
-        <div class="flex flex-col md:flex-row items-center gap-8 mb-20 relative z-10">
-            <div class="md:w-1/2 text-right order-2 md:order-1">
-                <h2 class="text-2xl font-bold text-amber-500 mb-2">Step 5. 나눔 & 완성</h2>
-                <h3 class="text-xl font-bold mb-3">BGN (Business Give Network)</h3>
-                <p class="text-stone-400 text-sm mb-4">"성공을 나누고 세상을 이롭게 합니다."</p>
-                <div class="bg-gradient-to-r from-amber-600 to-amber-800 p-6 rounded-xl shadow-lg text-white text-left inline-block">
-                    <p class="font-serif italic text-lg mb-2">"Better Life, Better World"</p>
-                    <ul class="text-xs space-y-1 opacity-90">
-                        <li>• 전세계 기아 주거 지원 프로젝트</li>
-                        <li>• 호스트 해외 봉사 및 글로벌 네트워크</li>
-                        <li>• 진정한 경제적, 정신적 자유 달성</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="order-1 md:order-2 z-20 relative">
-                <div class="w-20 h-20 rounded-full bg-amber-500 flex items-center justify-center text-3xl shadow-[0_0_30px_rgba(245,158,11,0.8)] border-4 border-stone-900">
-                    <i class="fa-solid fa-hands-holding-child"></i>
-                </div>
-            </div>
-            <div class="md:w-1/2 order-3 hidden md:block"></div>
-        </div>
-
-        <!-- Final CTA Section (Button Restored) -->
-        <div class="bg-stone-800 rounded-3xl p-8 md:p-12 text-center border border-stone-700 relative z-10 mb-20">
-            <h2 class="text-3xl font-bold mb-4">이제 당신의 차례입니다.</h2>
-            <p class="text-stone-400 mb-8 max-w-lg mx-auto">
-                혼자 고민하는 시간은 끝났습니다.<br>
-                전문가 11명과 함께하는 호스트 생태계, 헬퍼시리즈에 지금 탑승하세요.
-            </p>
-            <!-- ▼ 복구된 버튼 ▼ -->
-            <a href="https://forms.gle/VxscSmaUGaCr8jHL9" target="_blank" class="inline-block bg-white text-stone-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-rose-50 transition shadow-lg pulse-btn">
-                👉 지금 바로 무료 진단 신청하기
-            </a>
-            <!-- ▲ 복구된 버튼 ▲ -->
-        </div>
-
-        <!-- Family Site Links (하단 링크 모음) -->
-        <div class="border-t border-stone-800 pt-10 relative z-10">
-            <h3 class="text-center text-stone-500 font-bold mb-6 text-sm tracking-wider uppercase">Helper Series Services</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                
-                <!-- 1. Life Helper -->
-                <a href="https://lifehelper.co.kr/" target="_blank" class="bg-stone-900 border border-stone-700 hover:border-purple-500 p-4 rounded-xl flex items-center gap-4 transition group">
-                    <div class="w-10 h-10 rounded-full bg-purple-900/50 flex items-center justify-center text-purple-400 group-hover:bg-purple-600 group-hover:text-white transition">
-                        <i class="fa-solid fa-hotel"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-stone-200 group-hover:text-white">라이프 헬퍼</h4>
-                        <p class="text-xs text-stone-500">숙소 홍보 & 위탁 신청</p>
-                    </div>
-                    <i class="fa-solid fa-arrow-right ml-auto text-stone-600 group-hover:text-purple-500"></i>
-                </a>
-
-                <!-- 2. Gongsil Helper -->
-                <a href="http://gongsilhelpeo.com/" target="_blank" class="bg-stone-900 border border-stone-700 hover:border-emerald-500 p-4 rounded-xl flex items-center gap-4 transition group">
-                    <div class="w-10 h-10 rounded-full bg-emerald-900/50 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-600 group-hover:text-white transition">
-                        <i class="fa-solid fa-hand-holding-dollar"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-stone-200 group-hover:text-white">공실 헬퍼</h4>
-                        <p class="text-xs text-stone-500">숙소 직거래 & 매매</p>
-                    </div>
-                    <i class="fa-solid fa-arrow-right ml-auto text-stone-600 group-hover:text-emerald-500"></i>
-                </a>
-
-                <!-- 3. Helper Store -->
-                <a href="https://smartstore.naver.com/taewook86" target="_blank" class="bg-stone-900 border border-stone-700 hover:border-green-500 p-4 rounded-xl flex items-center gap-4 transition group">
-                    <div class="w-10 h-10 rounded-full bg-green-900/50 flex items-center justify-center text-green-400 group-hover:bg-green-600 group-hover:text-white transition">
-                        <i class="fa-solid fa-store"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-stone-200 group-hover:text-white">헬퍼 스토어</h4>
-                        <p class="text-xs text-stone-500">운영 물품 & 키트 구매</p>
-                    </div>
-                    <i class="fa-solid fa-arrow-right ml-auto text-stone-600 group-hover:text-green-500"></i>
-                </a>
-
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Sticky Floating CTA (Application + Threads) -->
-    <div class="fixed bottom-0 left-0 w-full z-50 p-4 md:p-6 flex justify-center items-stretch gap-3 pointer-events-none">
+    <!-- Global Navigation -->
+    <nav class="fixed top-0 w-full z-[100] bg-[#1c1917]/95 backdrop-blur-md border-b border-stone-800 h-16 flex items-center justify-between px-6">
+        <a href="#" onclick="showPage('home')" class="font-bold text-xl tracking-tighter text-white">Helper Series<span class="text-rose-500">.</span></a>
         
-        <!-- Application Form Button -->
-        <a href="https://forms.gle/VxscSmaUGaCr8jHL9" target="_blank" class="pointer-events-auto flex-1 md:flex-none md:w-auto md:min-w-[300px] bg-rose-600 text-white py-4 px-8 rounded-xl md:rounded-full font-bold text-center shadow-2xl hover:bg-rose-700 transition flex items-center justify-center gap-2 pulse-btn border-2 border-white/20 backdrop-blur-sm">
-            <span>🚀 호스트 성공 여정 시작하기 (신청)</span>
-        </a>
+        <div class="hidden md:flex gap-6 text-sm font-medium text-stone-300">
+            <button onclick="showPage('home')" class="hover:text-white transition" id="nav-home">홈 (시뮬레이션)</button>
+            <button onclick="showPage('landing')" class="hover:text-white transition" id="nav-landing">리부트 챌린지 (수강신청)</button>
+            <a href="https://smartstore.naver.com/taewook86" target="_blank" class="hover:text-white transition">헬퍼 스토어</a>
+        </div>
 
-        <!-- Threads Button (Official Icon - SVG Code) -->
-        <a href="https://www.threads.net/@hosthelper01" target="_blank" class="pointer-events-auto w-14 md:w-16 flex-none bg-white text-black rounded-xl md:rounded-full font-bold shadow-2xl hover:bg-stone-100 transition flex items-center justify-center border-2 border-white/20 backdrop-blur-sm">
-            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" preserveAspectRatio="xMidYMid meet" class="fill-black">
-                <path d="M16.035 5.25C10.05 5.25 5.25 10.05 5.25 16s4.8 10.75 10.785 10.75a10.617 10.617 0 0 0 5.867-1.767a1.077 1.077 0 0 0 .393-1.467a1.071 1.071 0 0 0-1.464-.393a8.47 8.47 0 0 1-4.796 1.472c-4.786 0-8.63-3.844-8.63-8.6s3.844-8.6 8.63-8.6c4.52 0 8.243 3.473 8.59 7.905c.08.975-.027 2.012-.472 2.875c-.32.613-.865.918-1.46.918c-.767 0-1.295-.595-1.295-1.455V16c0-2.315-1.885-4.2-4.2-4.2s-4.2 1.885-4.2 4.2s1.885 4.2 4.2 4.2c1.075 0 2.05-.405 2.78-1.072c.595 1.135 1.637 1.93 2.925 1.93c1.925 0 3.325-1.43 3.965-3.325c.57-1.685.63-3.665.485-5.22C26.565 10.62 21.925 5.25 16.035 5.25zM16.035 18.05c-1.135 0-2.05-.915-2.05-2.05s.915-2.05 2.05-2.05s2.05.915 2.05 2.05s-.915 2.05-2.05 2.05z"/>
-            </svg>
-        </a>
+        <button onclick="showPage('landing')" class="bg-rose-600 text-white text-xs px-4 py-2 rounded-full font-bold hover:bg-rose-700 transition">
+            1기 모집중
+        </button>
+    </nav>
 
+    <!-- ================= PAGE 1: HOME (Simulation) ================= -->
+    <div id="page-home" class="page-section active pt-32 px-4">
+        <div class="max-w-4xl mx-auto relative">
+            <div class="text-center mb-20 relative z-10">
+                <span class="text-rose-500 font-bold tracking-widest text-sm uppercase">Helper Series Universe</span>
+                <h1 class="text-4xl md:text-6xl font-extrabold mt-2 mb-6 glow-text">호스트 성공 시뮬레이션</h1>
+                <p class="text-stone-400 text-lg">당신이 헬퍼시리즈를 만나는 순간,<br>단순한 운영자가 아닌 <span class="text-white font-bold">자산가이자 리더</span>로 성장합니다.</p>
+            </div>
+
+            <div class="step-line hidden md:block"></div>
+
+            <!-- Step 1 -->
+            <div class="flex flex-col md:flex-row items-center mb-20 gap-8 relative z-10">
+                <div class="md:w-1/2 text-right order-2 md:order-1">
+                    <h2 class="text-2xl font-bold text-rose-500 mb-2">Step 1. 운영 등록 & 홍보</h2>
+                    <h3 class="text-xl font-bold mb-3">라이프 헬퍼 (Life Helper)</h3>
+                    <p class="text-stone-400 text-sm mb-4">"공실 때문에 힘드신가요? 저희가 채워드립니다."</p>
+                    <div class="bg-stone-800 p-4 rounded-xl border border-stone-700 text-left inline-block">
+                        <strong class="text-rose-400 text-xs block mb-2">🚀 공실 케어 6대 솔루션 가동</strong>
+                        <ul class="text-xs text-stone-300 space-y-1">
+                            <li>✅ 여행사 인바운드 단체객 배정</li>
+                            <li>✅ OTA 상위 노출 & 최적가 설정</li>
+                            <li>✅ 24시 다국어 응대 & 리뷰 방어</li>
+                            <li>✅ 전문 청소/세탁 퀄리티 보장</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 z-20 relative">
+                    <div class="w-16 h-16 rounded-full bg-rose-600 flex items-center justify-center text-2xl shadow-[0_0_20px_rgba(244,63,94,0.6)] border-4 border-[#1c1917]"><i class="fa-solid fa-hotel"></i></div>
+                </div>
+                <div class="md:w-1/2 order-3 hidden md:block"></div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="flex flex-col md:flex-row items-center mb-20 gap-8 relative z-10">
+                <div class="md:w-1/2 hidden md:block"></div>
+                <div class="order-1 md:order-2 z-20 relative">
+                    <div class="w-16 h-16 rounded-full bg-sky-600 flex items-center justify-center text-2xl shadow-[0_0_20px_rgba(2,132,199,0.6)] border-4 border-[#1c1917]"><i class="fa-solid fa-cart-shopping"></i></div>
+                </div>
+                <div class="md:w-1/2 order-2 md:order-3">
+                    <h2 class="text-2xl font-bold text-sky-500 mb-2">Step 2. 비용 절감 & 효율</h2>
+                    <h3 class="text-xl font-bold mb-3">헬퍼 스토어 (Helper Store)</h3>
+                    <p class="text-stone-400 text-sm mb-4">"버는 것만큼 아끼는 것도 중요합니다."</p>
+                    <div class="bg-stone-800 p-4 rounded-xl border border-stone-700">
+                        <ul class="text-xs text-stone-300 space-y-2">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sky-500 mr-2"></i> 호텔급 어메니티/침구 도매가 공급</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-sky-500 mr-2"></i> 운영 고정비 평균 20% 절감</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="flex flex-col md:flex-row items-center mb-20 gap-8 relative z-10">
+                <div class="md:w-1/2 text-right order-2 md:order-1">
+                    <h2 class="text-2xl font-bold text-emerald-500 mb-2">Step 3. 판매 & 엑시트</h2>
+                    <h3 class="text-xl font-bold mb-3">공실 헬퍼 (Vacancy Helper)</h3>
+                    <p class="text-stone-400 text-sm mb-4">"박수 칠 때 떠나고, 목돈을 만드세요."</p>
+                    <div class="bg-stone-800 p-4 rounded-xl border border-stone-700 text-left inline-block">
+                        <ul class="text-xs text-stone-300 space-y-2">
+                            <li class="flex items-center"><i class="fa-solid fa-hand-holding-dollar text-emerald-500 mr-2"></i> 권리금 합리적 산정 및 직거래</li>
+                            <li class="flex items-center"><i class="fa-solid fa-file-contract text-emerald-500 mr-2"></i> 조숙현 공인중개사의 안전 계약</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 z-20 relative">
+                    <div class="w-16 h-16 rounded-full bg-emerald-600 flex items-center justify-center text-2xl shadow-[0_0_20px_rgba(16,185,129,0.6)] border-4 border-[#1c1917]"><i class="fa-solid fa-money-bill-trend-up"></i></div>
+                </div>
+                <div class="md:w-1/2 order-3 hidden md:block"></div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="flex flex-col md:flex-row items-center mb-20 gap-8 relative z-10">
+                <div class="md:w-1/2 hidden md:block"></div>
+                <div class="order-1 md:order-2 z-20 relative">
+                    <div class="w-16 h-16 rounded-full bg-purple-600 flex items-center justify-center text-2xl shadow-[0_0_20px_rgba(147,51,234,0.6)] border-4 border-[#1c1917]"><i class="fa-solid fa-graduation-cap"></i></div>
+                </div>
+                <div class="md:w-1/2 order-2 md:order-3">
+                    <h2 class="text-2xl font-bold text-purple-500 mb-2">Step 4. 재투자 & 확장</h2>
+                    <h3 class="text-xl font-bold mb-3">헬퍼 아카데미 (Scale-Up)</h3>
+                    <p class="text-stone-400 text-sm mb-4">"호스트를 넘어 건물주로 레벨업하세요."</p>
+                    <div class="bg-stone-800 p-4 rounded-xl border border-stone-700">
+                        <strong class="text-purple-400 text-xs block mb-2">💎 프로젝트 팀(어벤져스) 전담 마크</strong>
+                        <ul class="text-xs text-stone-300 space-y-1">
+                            <li>• [건축/법률] 리모델링 인허가 & 계약 리스크 제거</li>
+                            <li>• [경매/중개] 수익형 건물/다호점 매물 추천</li>
+                            <li>• [현금흐름] 시스템 수익 구조 설계</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="flex flex-col md:flex-row items-center gap-8 mb-20 relative z-10">
+                <div class="md:w-1/2 text-right order-2 md:order-1">
+                    <h2 class="text-2xl font-bold text-amber-500 mb-2">Step 5. 나눔 & 완성</h2>
+                    <h3 class="text-xl font-bold mb-3">BGN (Business Give Network)</h3>
+                    <p class="text-stone-400 text-sm mb-4">"성공을 나누고 세상을 이롭게 합니다."</p>
+                    <div class="bg-gradient-to-r from-amber-600 to-amber-800 p-6 rounded-xl shadow-lg text-white text-left inline-block">
+                        <p class="font-serif italic text-lg mb-2">"Better Life, Better World"</p>
+                        <ul class="text-xs space-y-1 opacity-90">
+                            <li>• 전세계 기아 주거 지원 프로젝트</li>
+                            <li>• 호스트 해외 봉사 및 글로벌 네트워크</li>
+                            <li>• 진정한 경제적, 정신적 자유 달성</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 z-20 relative">
+                    <div class="w-20 h-20 rounded-full bg-amber-500 flex items-center justify-center text-3xl shadow-[0_0_30px_rgba(245,158,11,0.8)] border-4 border-stone-900"><i class="fa-solid fa-hands-holding-child"></i></div>
+                </div>
+                <div class="md:w-1/2 order-3 hidden md:block"></div>
+            </div>
+
+            <!-- CTA -->
+            <div class="bg-stone-800 rounded-3xl p-8 md:p-12 text-center border border-stone-700 relative z-10 mb-20">
+                <h2 class="text-3xl font-bold mb-4">이제 당신의 차례입니다.</h2>
+                <p class="text-stone-400 mb-8 max-w-lg mx-auto">
+                    혼자 고민하는 시간은 끝났습니다.<br>
+                    전문가 11명과 함께하는 호스트 생태계, 헬퍼시리즈에 지금 탑승하세요.
+                </p>
+                <button onclick="showPage('landing')" class="inline-block bg-white text-stone-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-rose-50 transition shadow-lg pulse-btn">
+                    👉 지금 바로 무료 진단 신청하기
+                </button>
+            </div>
+        </div>
     </div>
+
+    <!-- ================= PAGE 2: LANDING (Payment) ================= -->
+    <div id="page-landing" class="page-section bg-white text-stone-900 pt-32 px-4">
+        <!-- Hero -->
+        <div class="text-center max-w-4xl mx-auto mb-20">
+            <span class="bg-stone-900 text-white text-xs font-bold px-3 py-1 rounded-full mb-4 inline-block animate-pulse">기존 호스트 전용 (선착순 마감)</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+                지금 당신의 숙소는<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-red-600">생존할 준비가 되셨습니까?</span>
+            </h1>
+            <p class="text-lg text-stone-500 mb-10">
+                법적 리스크, 세금 폭탄, 공실 공포...<br>
+                <strong>11명의 전문가 팀</strong>이 당신의 숙소를 2주 만에 '생존형 모델'로 리부트합니다.
+            </p>
+            <button onclick="requestPayment()" class="bg-rose-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-glow hover:bg-rose-700 transition pulse-btn">
+                2주 리부트 챌린지 합류하기
+            </button>
+        </div>
+
+        <!-- Curriculum -->
+        <div class="max-w-4xl mx-auto mb-20">
+            <div class="bg-stone-900 text-white p-8 rounded-2xl">
+                <h3 class="text-2xl font-bold mb-6 text-rose-400">Week 1. 생존과 방어 (Survival)</h3>
+                <ul class="space-y-4 mb-8">
+                    <li class="flex items-start"><span class="text-rose-500 font-bold w-16">1교시</span> [법률] 2025 미신고 숙소 퇴출 이슈 & 합법 전환 전략</li>
+                    <li class="flex items-start"><span class="text-rose-500 font-bold w-16">2교시</span> [세무] 세금 폭탄 피하는 비용 처리 & 절세 노하우</li>
+                    <li class="flex items-start"><span class="text-rose-500 font-bold w-16">3교시</span> [운영] 청소 시간 30분 단축 & 침구 오염 복구 시크릿</li>
+                    <li class="flex items-start"><span class="text-rose-500 font-bold w-16">4교시</span> [비주얼] 돈 안 드는 리터칭으로 객단가 3만원 올리기</li>
+                    <li class="flex items-start"><span class="text-rose-500 font-bold w-16">5교시</span> [진단] 내 숙소 공개 클리닉 (강사 즉석 피드백)</li>
+                </ul>
+                <h3 class="text-2xl font-bold mb-6 text-sky-400">Week 2. 공격과 확장 (Growth)</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start"><span class="text-sky-500 font-bold w-16">1교시</span> [트래픽] 여행사 인바운드 직거래 & 수수료 0% 예약창</li>
+                    <li class="flex items-start"><span class="text-sky-500 font-bold w-16">2교시</span> [확장] 월세 탈출, 수익형 건물주(경매) 로드맵</li>
+                    <li class="flex items-start"><span class="text-sky-500 font-bold w-16">3교시</span> [엑시트] 권리금 1,000만원 더 받는 매출 장부 관리법</li>
+                    <li class="flex items-start"><span class="text-sky-500 font-bold w-16">4교시</span> [위탁] "이제 돈만 버세요" 라이프헬퍼 위탁 전환 안내</li>
+                    <li class="flex items-start"><span class="text-sky-500 font-bold w-16">5교시</span> [비전] 헬퍼 유니버스 멤버십 연결 & 수료식</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Pricing -->
+        <div class="max-w-3xl mx-auto bg-stone-50 rounded-3xl p-10 text-center border border-stone-200">
+            <h3 class="text-3xl font-bold text-stone-900 mb-2">2주 리부트 챌린지 패키지</h3>
+            <p class="text-stone-500 mb-8">강의 + 코칭 + 3대 키트 + 멤버십</p>
+            <div class="flex justify-center items-end gap-3 mb-8">
+                <span class="text-stone-400 text-xl line-through">₩850,000</span>
+                <span class="text-5xl font-extrabold text-rose-600">₩290,000</span>
+            </div>
+            <button onclick="requestPayment()" class="w-full bg-rose-600 text-white py-5 rounded-xl font-bold text-2xl shadow-lg hover:bg-rose-700 transition pulse-btn">
+                지금 바로 결제하고 시작하기
+            </button>
+        </div>
+    </div>
+
+    <!-- ================= SHARED FOOTER (Family Sites) ================= -->
+    <div class="max-w-4xl mx-auto px-4 mt-20 pb-10 border-t border-stone-700 pt-10">
+        <h3 class="text-center text-stone-500 font-bold mb-6 text-sm tracking-wider uppercase">Helper Series Services</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- 1. Life Helper -->
+            <a href="https://lifehelper.co.kr/" target="_blank" class="bg-stone-800 p-4 rounded-xl flex items-center gap-4 hover:bg-stone-700 transition group border border-stone-700">
+                <div class="w-10 h-10 rounded-full bg-purple-900 text-purple-400 flex items-center justify-center"><i class="fa-solid fa-hotel"></i></div>
+                <div class="text-left">
+                    <h4 class="font-bold text-stone-200 text-sm group-hover:text-white">라이프 헬퍼</h4>
+                    <p class="text-xs text-stone-500">숙소 홍보 & 위탁</p>
+                </div>
+            </a>
+            <!-- 2. Gongsil Helper -->
+            <a href="http://gongsilhelpeo.com/" target="_blank" class="bg-stone-800 p-4 rounded-xl flex items-center gap-4 hover:bg-stone-700 transition group border border-stone-700">
+                <div class="w-10 h-10 rounded-full bg-emerald-900 text-emerald-400 flex items-center justify-center"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                <div class="text-left">
+                    <h4 class="font-bold text-stone-200 text-sm group-hover:text-white">공실 헬퍼</h4>
+                    <p class="text-xs text-stone-500">숙소 직거래</p>
+                </div>
+            </a>
+            <!-- 3. Helper Store -->
+            <a href="https://smartstore.naver.com/taewook86" target="_blank" class="bg-stone-800 p-4 rounded-xl flex items-center gap-4 hover:bg-stone-700 transition group border border-stone-700">
+                <div class="w-10 h-10 rounded-full bg-green-900 text-green-400 flex items-center justify-center"><i class="fa-solid fa-store"></i></div>
+                <div class="text-left">
+                    <h4 class="font-bold text-stone-200 text-sm group-hover:text-white">헬퍼 스토어</h4>
+                    <p class="text-xs text-stone-500">운영 물품 구매</p>
+                </div>
+            </a>
+            <!-- 4. Expert Hotline -->
+            <a href="https://pf.kakao.com/_xjusMn" target="_blank" class="bg-stone-800 p-4 rounded-xl flex items-center gap-4 hover:bg-stone-700 transition group border border-stone-700">
+                <div class="w-10 h-10 rounded-full bg-yellow-600 text-yellow-300 flex items-center justify-center"><i class="fa-solid fa-comment"></i></div>
+                <div class="text-left">
+                    <h4 class="font-bold text-stone-200 text-sm group-hover:text-white">전문가 1:1</h4>
+                    <p class="text-xs text-stone-500">카카오톡 상담</p>
+                </div>
+            </a>
+        </div>
+        <p class="text-center text-stone-600 text-xs mt-10">Copyright © HostMaster. All rights reserved.</p>
+    </div>
+
+    <!-- Sticky Floating CTA -->
+    <div class="fixed bottom-0 left-0 w-full z-50 p-4 md:p-6 flex justify-center items-stretch gap-3 pointer-events-none">
+        <!-- Main Button -->
+        <button onclick="showPage('landing')" id="sticky-btn" class="pointer-events-auto flex-1 md:flex-none md:w-auto md:min-w-[300px] bg-rose-600 text-white py-4 px-8 rounded-xl md:rounded-full font-bold text-center shadow-2xl hover:bg-rose-700 transition flex items-center justify-center gap-2 pulse-btn border-2 border-white/20 backdrop-blur-sm">
+            <span>🚀 호스트 리부트 챌린지 신청하기</span>
+        </button>
+        <!-- Threads Button -->
+        <a href="https://www.threads.net/@hosthelper01" target="_blank" class="pointer-events-auto w-14 md:w-16 flex-none bg-white text-black rounded-xl md:rounded-full font-bold shadow-2xl hover:bg-stone-100 transition flex items-center justify-center border-2 border-white/20 backdrop-blur-sm">
+            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" preserveAspectRatio="xMidYMid meet" class="fill-black"><path d="M16.035 5.25C10.05 5.25 5.25 10.05 5.25 16s4.8 10.75 10.785 10.75a10.617 10.617 0 0 0 5.867-1.767a1.077 1.077 0 0 0 .393-1.467a1.071 1.071 0 0 0-1.464-.393a8.47 8.47 0 0 1-4.796 1.472c-4.786 0-8.63-3.844-8.63-8.6s3.844-8.6 8.63-8.6c4.52 0 8.243 3.473 8.59 7.905c.08.975-.027 2.012-.472 2.875c-.32.613-.865.918-1.46.918c-.767 0-1.295-.595-1.295-1.455V16c0-2.315-1.885-4.2-4.2-4.2s-4.2 1.885-4.2 4.2s1.885 4.2 4.2 4.2c1.075 0 2.05-.405 2.78-1.072c.595 1.135 1.637 1.93 2.925 1.93c1.925 0 3.325-1.43 3.965-3.325c.57-1.685.63-3.665.485-5.22C26.565 10.62 21.925 5.25 16.035 5.25zM16.035 18.05c-1.135 0-2.05-.915-2.05-2.05s.915-2.05 2.05-2.05s2.05.915 2.05 2.05s-.915 2.05-2.05 2.05z"/></svg>
+        </a>
+    </div>
+
+    <!-- Script: Page Navigation & Payment -->
+    <script>
+        // --- 1. 페이지 전환 로직 ---
+        function showPage(pageId) {
+            // 모든 섹션 숨기기
+            document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+            // 선택한 섹션 보이기
+            document.getElementById('page-' + pageId).classList.add('active');
+            
+            // 상단 메뉴 활성화 스타일 변경
+            const navHome = document.getElementById('nav-home');
+            const navLanding = document.getElementById('nav-landing');
+            const stickyBtn = document.querySelector('#sticky-btn span');
+            
+            if (pageId === 'home') {
+                navHome.classList.add('text-rose-500', 'font-bold');
+                navLanding.classList.remove('text-rose-500', 'font-bold');
+                window.scrollTo(0, 0);
+                stickyBtn.innerText = "🚀 호스트 리부트 챌린지 신청하기";
+                document.getElementById('sticky-btn').setAttribute('onclick', "showPage('landing')");
+            } else {
+                navLanding.classList.add('text-rose-500', 'font-bold');
+                navHome.classList.remove('text-rose-500', 'font-bold');
+                window.scrollTo(0, 0);
+                stickyBtn.innerText = "💳 지금 바로 결제하기";
+                document.getElementById('sticky-btn').setAttribute('onclick', "requestPayment()");
+            }
+        }
+
+        // --- 2. 결제 로직 (PortOne) ---
+        var IMP = window.IMP; 
+        IMP.init("imp19424728"); // 테스트 가맹점 ID
+
+        function requestPayment() {
+            IMP.request_pay({
+                pg: "html5_inicis", 
+                pay_method: "card",
+                merchant_uid: "class_" + new Date().getTime(),
+                name: "호스트 리부트 챌린지 1기",
+                amount: 290000, 
+                buyer_email: "host@example.com",
+                buyer_name: "예비 수강생",
+                buyer_tel: "010-1234-5678"
+            }, function (rsp) {
+                if (rsp.success) {
+                    alert("✅ 결제 성공! \n담당자가 10분 내로 헬퍼 키트를 발송해 드립니다.");
+                } else {
+                    alert("❌ 결제 실패: " + rsp.error_msg);
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>
