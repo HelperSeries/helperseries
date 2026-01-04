@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>호스트 리부트 챌린지 1기 모집</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- PortOne Payment SDK -->
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; word-break: keep-all; scroll-behavior: smooth; }
+        .gradient-text { background: linear-gradient(to right, #f43f5e, #e11d48); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .shadow-glow { box-shadow: 0 0 25px rgba(244, 63, 94, 0.4); }
+        .pulse-btn { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(244, 63, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+        }
+    </style>
+</head>
+<body class="bg-white text-stone-900 pb-32"> <!-- 하단 여백 확보 -->
+
+    <!-- Sticky Header -->
+    <header class="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 border-b border-stone-100 h-16 flex items-center justify-between px-4 md:px-8">
+        <span class="font-bold text-xl tracking-tighter">HostMaster<span class="text-rose-500">.</span></span>
+        <button onclick="requestPayment()" class="bg-rose-600 text-white text-sm font-bold px-4 py-2 rounded-lg hover:bg-rose-700 transition shadow-md">
+            수강 신청하기
+        </button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 text-center bg-stone-50 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto relative z-10">
+            <span class="bg-stone-900 text-white text-xs font-bold px-3 py-1 rounded-full mb-4 inline-block animate-pulse">기존 호스트 전용 (선착순 마감)</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+                지금 당신의 숙소는<br>
+                <span class="gradient-text">생존할 준비가 되셨습니까?</span>
+            </h1>
+            <p class="text-lg text-stone-500 mb-10 max-w-2xl mx-auto">
+                법적 리스크, 세금 폭탄, 공실 공포...<br>
+                <strong>11명의 전문가 팀</strong>이 당신의 숙소를 2주 만에 '생존형 모델'로 리부트합니다.
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <button onclick="requestPayment()" class="bg-rose-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-glow hover:bg-rose-700 transition pulse-btn">
+                    2주 리부트 챌린지 합류하기
+                </button>
+            </div>
+            <p class="text-xs text-stone-400 mt-4">* 불만족 시 100% 환불 보장</p>
+        </div>
+    </section>
+
+    <!-- Pain Point (Why) -->
+    <section class="py-20 px-4">
+        <div class="max-w-5xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-12">혹시 이런 상황이신가요?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 홈스타일링 고민 -->
+                <div class="p-6 border border-stone-200 rounded-2xl hover:border-rose-500 transition hover:shadow-lg group">
+                    <div class="text-5xl mb-4 group-hover:scale-110 transition duration-300">🎨</div>
+                    <h3 class="text-xl font-bold mb-2">밋밋한 비주얼</h3>
+                    <p class="text-stone-500 text-sm">"다 비슷한 인테리어로는<br>더 이상 게스트가 클릭하지 않습니다."</p>
+                </div>
+                
+                <div class="p-6 border border-stone-200 rounded-2xl hover:border-rose-500 transition hover:shadow-lg group">
+                    <div class="text-5xl mb-4 group-hover:scale-110 transition duration-300">⚖️</div>
+                    <h3 class="text-xl font-bold mb-2">법적 불안감</h3>
+                    <p class="text-stone-500 text-sm">"내년엔 오피스텔 단속한다는데...<br>이행강제금 나오면 어떡하지?"</p>
+                </div>
+                
+                <div class="p-6 border border-stone-200 rounded-2xl hover:border-rose-500 transition hover:shadow-lg group">
+                    <div class="text-5xl mb-4 group-hover:scale-110 transition duration-300">💸</div>
+                    <h3 class="text-xl font-bold mb-2">세금 폭탄</h3>
+                    <p class="text-stone-500 text-sm">"번 건 없는데 세금은 왜 이래?<br>비용 처리 제대로 하고 있는 걸까?"</p>
+                </div>
+            </div>
+            <div class="mt-12 bg-rose-50 p-6 rounded-xl inline-block">
+                <p class="font-bold text-rose-700">이대로 두면 도태됩니다. 전문가의 '진단'과 '시스템 교체'가 필요합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curriculum (What) -->
+    <section class="py-20 px-4 bg-stone-900 text-white">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-rose-500 font-bold tracking-widest text-xs uppercase mb-2 block">Curriculum</span>
+                <h2 class="text-3xl font-bold">2주 완성: 호스트 리부트 캠프</h2>
+                <p class="text-stone-400 mt-4">단 2번의 주말 집중 훈련으로 당신의 숙소를 180도 바꿉니다.</p>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Week 1: Survival & Defense -->
+                <div class="bg-stone-800 p-8 rounded-2xl border border-stone-700">
+                    <h3 class="text-2xl font-bold mb-4 text-rose-400">Week 1. 생존과 방어 (Survival & Defense)</h3>
+                    <p class="text-stone-300 mb-6 border-b border-stone-600 pb-4">"당장 닥쳐올 법적/세금 리스크를 제거하고, 새는 돈을 막습니다."</p>
+                    <ul class="space-y-3 text-sm md:text-base">
+                        <li class="flex items-start"><span class="text-rose-500 mr-3 font-bold w-12 shrink-0">1교시</span> <span><strong>[법률/생존]</strong> 2025년 미신고 숙소 퇴출 이슈 & 합법 전환 전략</span></li>
+                        <li class="flex items-start"><span class="text-rose-500 mr-3 font-bold w-12 shrink-0">2교시</span> <span><strong>[세무/방어]</strong> 세금 폭탄 피하는 비용 처리 & 절세 노하우 (부가세/종소세)</span></li>
+                        <li class="flex items-start"><span class="text-rose-500 mr-3 font-bold w-12 shrink-0">3교시</span> <span><strong>[운영/효율]</strong> 청소 시간 30분 단축 & 침구 오염 복구 시크릿</span></li>
+                        <li class="flex items-start"><span class="text-rose-500 mr-3 font-bold w-12 shrink-0">4교시</span> <span><strong>[비주얼]</strong> 돈 안 드는 리터칭으로 객단가 3만원 올리기</span></li>
+                        <li class="flex items-start"><span class="text-rose-500 mr-3 font-bold w-12 shrink-0">5교시</span> <span><strong>[진단]</strong> 내 숙소 공개 클리닉 (강사 즉석 피드백)</span></li>
+                    </ul>
+                </div>
+
+                <!-- Week 2: Attack & Expansion -->
+                <div class="bg-stone-800 p-8 rounded-2xl border border-stone-700">
+                    <h3 class="text-2xl font-bold mb-4 text-sky-400">Week 2. 공격과 확장 (Attack & Expansion)</h3>
+                    <p class="text-stone-300 mb-6 border-b border-stone-600 pb-4">"플랫폼 밖에서 손님을 데려오고(트래픽), 자산을 불려(경매) 졸업합니다."</p>
+                    <ul class="space-y-3 text-sm md:text-base">
+                        <li class="flex items-start"><span class="text-sky-500 mr-3 font-bold w-12 shrink-0">1교시</span> <span><strong>[트래픽]</strong> 여행사 인바운드 직거래 & 수수료 0% 예약창 세팅</span></li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-3 font-bold w-12 shrink-0">2교시</span> <span><strong>[확장]</strong> 월세 탈출, 수익형 건물주(경매) 로드맵</span></li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-3 font-bold w-12 shrink-0">3교시</span> <span><strong>[엑시트]</strong> 권리금 1,000만원 더 받는 매출 장부 관리법</span></li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-3 font-bold w-12 shrink-0">4교시</span> <span><strong>[위탁]</strong> "이제 돈만 버세요" 라이프헬퍼 위탁 전환 안내</span></li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-3 font-bold w-12 shrink-0">5교시</span> <span><strong>[비전]</strong> 헬퍼 유니버스 멤버십 연결 & 수료식</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The 3 Kits (Bonus) -->
+    <section class="py-20 px-4 bg-white">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="bg-rose-100 text-rose-600 font-bold px-3 py-1 rounded-full text-xs">수강생 전원 무료 증정</span>
+                <h2 class="text-3xl font-bold mt-4">빈손으로 보내지 않습니다.<br>30만 원 상당의 <span class="text-rose-600">3대 헬퍼 키트</span> 제공</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Kit 1 -->
+                <div class="border border-stone-200 p-6 rounded-2xl hover:shadow-xl transition text-center group">
+                    <div class="w-16 h-16 mx-auto bg-stone-900 rounded-full flex items-center justify-center text-white text-2xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3 class="font-bold text-lg mb-2">1. 철통 보안 키트</h3>
+                    <p class="text-stone-500 text-sm mb-4">변호사 계약서, 내용증명 양식,<br>안전 점검표 파일</p>
+                    <span class="text-xs bg-stone-100 px-2 py-1 rounded font-bold text-stone-600">개별구매가 9.9만</span>
+                </div>
+                <!-- Kit 2 -->
+                <div class="border border-stone-200 p-6 rounded-2xl hover:shadow-xl transition text-center group">
+                    <div class="w-16 h-16 mx-auto bg-sky-600 rounded-full flex items-center justify-center text-white text-2xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-robot"></i></div>
+                    <h3 class="font-bold text-lg mb-2">2. 운영 해방 키트</h3>
+                    <p class="text-stone-500 text-sm mb-4">청소 사진 매뉴얼, 오염 제거법,<br>CS 방어 멘트 50선</p>
+                    <span class="text-xs bg-stone-100 px-2 py-1 rounded font-bold text-stone-600">개별구매가 9.9만</span>
+                </div>
+                <!-- Kit 3 -->
+                <div class="border border-stone-200 p-6 rounded-2xl hover:shadow-xl transition text-center group">
+                    <div class="w-16 h-16 mx-auto bg-rose-500 rounded-full flex items-center justify-center text-white text-2xl mb-4 group-hover:scale-110 transition"><i class="fa-solid fa-rocket"></i></div>
+                    <h3 class="font-bold text-lg mb-2">3. 매출 폭발 키트</h3>
+                    <p class="text-stone-500 text-sm mb-4">스타일링 룩북, 촬영 가이드,<br>여행사 제휴 가이드</p>
+                    <span class="text-xs bg-stone-100 px-2 py-1 rounded font-bold text-stone-600">개별구매가 9.9만</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Post-Course Benefits (After) -->
+    <section class="py-20 px-4 bg-stone-50">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">졸업은 끝이 아니라 시작입니다.</h2>
+                <p class="text-stone-600">수료 즉시, <strong>[헬퍼시리즈 유니버스]</strong> 정회원 자격이 부여됩니다.<br>안 하면 무조건 손해인 4가지 멤버십 혜택을 확인하세요.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white p-5 rounded-xl shadow-sm flex gap-4 items-center">
+                    <div class="text-3xl text-purple-600"><i class="fa-solid fa-hotel"></i></div>
+                    <div>
+                        <h4 class="font-bold">라이프 헬퍼 (위탁/홍보)</h4>
+                        <p class="text-sm text-stone-500">위탁 전환 시 첫 달 수수료 0원,<br>공실 발생 시 여행사 손님 우선 배정</p>
+                    </div>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm flex gap-4 items-center">
+                    <div class="text-3xl text-green-600"><i class="fa-solid fa-cart-shopping"></i></div>
+                    <div>
+                        <h4 class="font-bold">헬퍼 스토어 (쇼핑)</h4>
+                        <p class="text-sm text-stone-500">평생 VIP 도매가(최저가) 적용,<br>호텔 침구/어메니티 즉시 할인</p>
+                    </div>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm flex gap-4 items-center">
+                    <div class="text-3xl text-emerald-600"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                    <div>
+                        <h4 class="font-bold">공실 헬퍼 (거래)</h4>
+                        <p class="text-sm text-stone-500">내 숙소 매물 등록비 무료,<br>권리금 감정 평가 및 안전 계약 지원</p>
+                    </div>
+                </div>
+                <div class="bg-white p-5 rounded-xl shadow-sm flex gap-4 items-center">
+                    <div class="text-3xl text-rose-600"><i class="fa-solid fa-user-group"></i></div>
+                    <div>
+                        <h4 class="font-bold">전문가 1:1 핫라인</h4>
+                        <p class="text-sm text-stone-500">변호사, 건축사, 세무사 다이렉트 연결,<br>심화 과정(건물주/경매) 30% 할인</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing & Payment -->
+    <section class="py-20 px-4">
+        <div class="max-w-3xl mx-auto bg-white rounded-3xl shadow-2xl border border-stone-200 overflow-hidden text-center">
+            <div class="bg-stone-900 text-white py-4 text-sm font-bold tracking-wider">
+                1기 얼리버드 특가 (잔여: 12자리)
+            </div>
+            <div class="p-10">
+                <h3 class="text-3xl font-bold text-stone-900 mb-2">2주 리부트 챌린지 패키지</h3>
+                <p class="text-stone-500 mb-8">강의 + 코칭 + 3대 키트 + 멤버십</p>
+                
+                <div class="flex justify-center items-end gap-3 mb-8">
+                    <span class="text-stone-400 text-xl line-through decoration-rose-500 decoration-2">₩850,000</span>
+                    <span class="text-5xl font-extrabold text-rose-600">₩290,000</span>
+                </div>
+
+                <div class="bg-stone-50 p-4 rounded-xl mb-8 text-sm text-stone-600 text-left space-y-2">
+                    <p>✅ <strong>3대 헬퍼 키트</strong> (30만 원 상당) 무료</p>
+                    <p>✅ <strong>전문가 11인</strong> 연결 및 할인권 제공</p>
+                    <p>✅ <strong>라이프헬퍼 위탁</strong> 수수료 1개월 면제 혜택</p>
+                    <p>✅ <strong>100% 환불 보장</strong> (오리엔테이션 후 불만족 시)</p>
+                </div>
+
+                <button onclick="requestPayment()" class="w-full bg-rose-600 text-white py-5 rounded-xl font-bold text-2xl shadow-lg hover:bg-rose-700 transition pulse-btn">
+                    지금 바로 결제하고 시작하기
+                </button>
+                <p class="text-xs text-stone-400 mt-4">카드결제 / 카카오페이 / 무통장입금 가능</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Family Site Links -->
+    <section class="bg-stone-900 py-12 px-4 border-t border-stone-800">
+        <div class="max-w-4xl mx-auto">
+            <h3 class="text-center text-stone-500 font-bold mb-8 text-sm tracking-wider uppercase">Helper Series Services</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+                <!-- 1. Life Helper -->
+                <a href="https://lifehelper.co.kr/" target="_blank" class="bg-stone-800 p-4 rounded-xl flex items-center gap-4 hover:bg-stone-700 transition">
+                    <div class="w-10 h-10 rounded-full bg-purple-900 text-purple-400 flex items-center justify-center"><i class="fa-solid fa-hotel"></i></div>
+                    <div class="text-left">
+                        <h4 class="font-bold text-stone-200 text-sm">라이프 헬퍼</h4>
+                        <p class="text-xs text-stone-500">숙소 홍보 & 위탁</p>
+                    </div>
+                </a>
+
+                <!-- 2. Gongsil Helper -->
+                <a href="http://gongsilhelpeo.com/" target="_blank" class="bg-stone-800 p-4 rounded-xl flex items-center gap-4 hover:bg-stone-700 transition">
+                    <div class="w-10 h-10 rounded-full bg-emerald-900 text-emerald-400 flex items-center justify-center"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                    <div class="text-left">
+                        <h4 class="font-bold text-stone-200 text-sm">공실 헬퍼</h4>
+                        <p class="text-xs text-stone-500">숙소 직거래</p>
+                    </div>
+                </a>
+
+                <!-- 3. Helper Store -->
+                <a href="https://smartstore.naver.com/taewook86" target="_blank" class="bg-stone-800 p-4 rounded-xl flex items-center gap-4 hover:bg-stone-700 transition">
+                    <div class="w-10 h-10 rounded-full bg-green-900 text-green-400 flex items-center justify-center"><i class="fa-solid fa-store"></i></div>
+                    <div class="text-left">
+                        <h4 class="font-bold text-stone-200 text-sm">헬퍼 스토어</h4>
+                        <p class="text-xs text-stone-500">운영 물품 구매</p>
+                    </div>
+                </a>
+
+                <!-- 4. Expert Hotline (Kakao) -->
+                <a href="https://pf.kakao.com/_xjusMn" target="_blank" class="bg-stone-800 p-4 rounded-xl flex items-center gap-4 hover:bg-stone-700 transition">
+                    <div class="w-10 h-10 rounded-full bg-yellow-500 text-stone-900 flex items-center justify-center"><i class="fa-solid fa-comment"></i></div>
+                    <div class="text-left">
+                        <h4 class="font-bold text-stone-200 text-sm">전문가 1:1 핫라인</h4>
+                        <p class="text-xs text-stone-500">카카오톡 상담</p>
+                    </div>
+                </a>
+
+            </div>
+            <p class="text-center text-stone-600 text-xs mt-10">Copyright © HostMaster. All rights reserved.</p>
+        </div>
+    </section>
+
+    <!-- Sticky Floating CTA (With White Threads Button) -->
+    <div class="fixed bottom-0 left-0 w-full z-50 p-4 md:p-6 flex justify-center items-stretch gap-3 pointer-events-none">
+        
+        <!-- Payment Button -->
+        <button onclick="requestPayment()" class="pointer-events-auto flex-1 md:flex-none md:w-auto md:min-w-[300px] bg-rose-600 text-white py-4 px-8 rounded-xl md:rounded-full font-bold text-center shadow-2xl hover:bg-rose-700 transition flex items-center justify-center gap-2 pulse-btn border-2 border-white/20 backdrop-blur-sm">
+            <span>🚀 1기 수강 신청하기</span>
+        </button>
+
+        <!-- Threads Button (Official Icon - SVG Code) -->
+        <a href="https://www.threads.net/@hosthelper01" target="_blank" class="pointer-events-auto w-14 md:w-16 flex-none bg-white text-black rounded-xl md:rounded-full font-bold shadow-2xl hover:bg-stone-100 transition flex items-center justify-center border-2 border-white/20 backdrop-blur-sm">
+            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" preserveAspectRatio="xMidYMid meet" class="fill-black">
+                <path d="M16.035 5.25C10.05 5.25 5.25 10.05 5.25 16s4.8 10.75 10.785 10.75a10.617 10.617 0 0 0 5.867-1.767a1.077 1.077 0 0 0 .393-1.467a1.071 1.071 0 0 0-1.464-.393a8.47 8.47 0 0 1-4.796 1.472c-4.786 0-8.63-3.844-8.63-8.6s3.844-8.6 8.63-8.6c4.52 0 8.243 3.473 8.59 7.905c.08.975-.027 2.012-.472 2.875c-.32.613-.865.918-1.46.918c-.767 0-1.295-.595-1.295-1.455V16c0-2.315-1.885-4.2-4.2-4.2s-4.2 1.885-4.2 4.2s1.885 4.2 4.2 4.2c1.075 0 2.05-.405 2.78-1.072c.595 1.135 1.637 1.93 2.925 1.93c1.925 0 3.325-1.43 3.965-3.325c.57-1.685.63-3.665.485-5.22C26.565 10.62 21.925 5.25 16.035 5.25zM16.035 18.05c-1.135 0-2.05-.915-2.05-2.05s.915-2.05 2.05-2.05s2.05.915 2.05 2.05s-.915 2.05-2.05 2.05z"/>
+            </svg>
+        </a>
+
+    </div>
+
+    <!-- Payment Logic Script -->
+    <script>
+        var IMP = window.IMP; 
+        // 포트원(KG이니시스) 테스트용 가맹점 식별코드 설정
+        IMP.init("imp19424728"); // 공용 테스트 ID
+
+        function requestPayment() {
+            // 실제 결제 요청 (현재는 KG이니시스 테스트 모드)
+            IMP.request_pay({
+                pg: "html5_inicis", // 테스트용 PG사
+                pay_method: "card",
+                merchant_uid: "class_" + new Date().getTime(), // 주문번호 (매번 달라야 함)
+                name: "호스트 리부트 챌린지 1기",
+                amount: 290000, // 결제 금액
+                buyer_email: "host@example.com",
+                buyer_name: "예비 수강생",
+                buyer_tel: "010-1234-5678"
+            }, function (rsp) { // callback 함수
+                if (rsp.success) {
+                    alert("✅ 결제가 완료되었습니다! (테스트 성공)\n\n담당자가 10분 내로 헬퍼 키트와 초대장을 발송해 드립니다.");
+                    // 실제 서비스에서는 여기서 DB에 저장하거나 완료 페이지로 이동합니다.
+                } else {
+                    alert("❌ 결제에 실패하였습니다. \n에러내용 : " + rsp.error_msg);
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
