@@ -175,8 +175,8 @@
                     혼자 고민하는 시간은 끝났습니다.<br>
                     전문가 11명과 함께하는 호스트 생태계, 헬퍼시리즈에 지금 탑승하세요.
                 </p>
-                <!-- 아래 버튼 클릭 시 구글 설문지로 이동 -->
-                <button onclick="window.open('https://forms.gle/mPdef2RkE4fBqEcm6', '_blank')" class="inline-block bg-white text-stone-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-rose-50 transition shadow-lg pulse-btn">
+                <!-- 아래 버튼 클릭 시 구글 설문지로 이동 (링크 업데이트) -->
+                <button onclick="window.open('https://forms.gle/zgoM8PYBP1R5ntMV6', '_blank')" class="inline-block bg-white text-stone-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-rose-50 transition shadow-lg pulse-btn">
                     👉 지금 바로 무료 진단 신청하기
                 </button>
             </div>
@@ -287,7 +287,7 @@
     <div class="fixed bottom-0 left-0 w-full z-50 p-4 md:p-6 flex justify-center items-stretch gap-3 pointer-events-none">
         <!-- Main Button (Dynamic Text) -->
         <button onclick="handleStickyClick()" id="sticky-btn" class="pointer-events-auto flex-1 md:flex-none md:w-auto md:min-w-[300px] bg-rose-600 text-white py-4 px-8 rounded-xl md:rounded-full font-bold text-center shadow-2xl hover:bg-rose-700 transition flex items-center justify-center gap-2 pulse-btn border-2 border-white/20 backdrop-blur-sm">
-            <span>🚀 호스트 리부트 챌린지 신청하기</span>
+            <span>🚀 지금 바로 무료 진단 신청하기 </span>
         </button>
         <!-- Threads Button -->
         <a href="https://www.threads.net/@hosthelper01" target="_blank" class="pointer-events-auto w-14 md:w-16 flex-none bg-white text-black rounded-xl md:rounded-full font-bold shadow-2xl hover:bg-stone-100 transition flex items-center justify-center border-2 border-white/20 backdrop-blur-sm">
@@ -315,7 +315,7 @@
             if (pageId === 'home') {
                 navHome.classList.add('text-rose-500', 'font-bold');
                 navLanding.classList.remove('text-rose-500', 'font-bold');
-                stickyBtnText.innerText = "🚀 호스트 리부트 챌린지 신청하기";
+                stickyBtnText.innerText = "🚀 지금 바로 무료 진단 신청하기";
                 
                 // 홈에서는 배경 검정
                 document.body.style.backgroundColor = "#1c1917";
@@ -335,7 +335,7 @@
 
         function handleStickyClick() {
             if (currentPage === 'home') {
-                showPage('landing');
+                window.open('https://forms.gle/zgoM8PYBP1R5ntMV6', '_blank');
             } else {
                 requestPayment();
             }
